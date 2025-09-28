@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Türkiye'nin en iyi radyo istasyonlarını dinleyin. Canlı yayın, müzik, haber ve eğlence programları.">
+    <meta name="keywords" content="radyo, canlı yayın, müzik, türkiye radyoları, online radyo">
+    <title>Radyo Dinle - Türkiye'nin En İyi Radyoları</title>
+    <link rel="canonical" href="https://canliradyodinle.fm/">
+    <link rel="alternate" hreflang="tr-TR" href="https://canliradyodinle.fm/">
+    <link rel="alternate" hreflang="en" href="https://canliradyodinle.fm/en/">
+    <link rel="alternate" hreflang="x-default" href="https://canliradyodinle.fm/">
+    
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Radyo Dinle">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Radyo Dinle - Türkiye'nin En İyi Radyoları">
+    <meta property="og:description" content="Türkiye'nin en iyi radyo istasyonlarını dinleyin. Canlı yayın, müzik, haber ve eğlence programları.">
+    <meta property="og:url" content="https://canliradyodinle.fm/">
+    <meta property="og:image" content="images/og-cover.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Radyo Dinle - Türkiye'nin En İyi Radyoları">
+    <meta name="twitter:description" content="Türkiye'nin en iyi radyo istasyonlarını dinleyin. Canlı yayın, müzik, haber ve eğlence programları.">
+    <meta name="twitter:image" content="images/og-cover.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1b4f72">
+    <link rel="apple-touch-icon" href="images/icons/icon-192.png">
+
+    <!-- Security: basic CSP (adjust domains in production) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline'; script-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; connect-src 'self' http://localhost:3000 https:; media-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests">
+
+    <!-- Performance: preconnect/preload -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://playerservices.streamtheworld.com" crossorigin>
+    <link rel="preconnect" href="http://localhost:3000">
+    <link rel="dns-prefetch" href="//playerservices.streamtheworld.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- JSON-LD: WebSite & Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://canliradyodinle.fm/#website",
+          "url": "https://canliradyodinle.fm/",
+          "name": "Radyo Dinle",
+          "inLanguage": "tr-TR",
+          "description": "Türkiye'nin en iyi radyo istasyonlarını dinleyin. Canlı yayın, müzik, haber ve eğlence programları."
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://canliradyodinle.fm/#organization",
+          "name": "Radyo Dinle",
+          "url": "https://canliradyodinle.fm/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://canliradyodinle.fm/images/logo.png"
+          }
+        },
+        {
+          "@type": "RadioStation",
+          "@id": "https://canliradyodinle.fm/#radiostation",
+          "name": "Radyo Dinle",
+          "url": "https://canliradyodinle.fm/",
+          "areaServed": "TR",
+          "inLanguage": "tr-TR"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- JSON-LD: MusicRecording (now playing template, JS güncelleyecek) -->
+    <script type="application/ld+json" id="schema-now-playing">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "name": "Canlı Yayın",
+      "byArtist": { "@type": "MusicGroup", "name": "-" }
+    }
+    </script>
+</head>
+<body>
+    <!-- Left side social media icons -->
+    <div class="left-social-icons">
+        <a href="#" class="left-social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="left-social-icon twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="left-social-icon instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="left-social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <!-- Night mode toggle button -->
+    <button class="night-mode-btn" id="nightModeBtn"><i class="ri-moon-line"></i></button>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-row">
+                    <img src="images/logo.png" alt="Radyo Dinle" class="header-logo">
+                    <span class="header-title">Radyo Dinle</span>
+                </div>
+                <p>Türkiye'nin En İyi Radyoları</p>
+            </div>
+            <div class="auth-buttons">
+                <button class="auth-btn login-btn">Giriş Yap</button>
+                <button class="auth-btn register-btn register">Kayıt Ol</button>
+                <button class="auth-btn logout-btn" style="display: none;">Çıkış Yap</button>
+                <select class="country-select" id="countrySelect">
+                    <option value="tr" data-icon="flag-icon flag-icon-tr" selected>Türkiye</option>
+                    <option value="us" data-icon="flag-icon flag-icon-us">ABD</option>
+                    <option value="de" data-icon="flag-icon flag-icon-de">Almanya</option>
+                    <option value="fr" data-icon="flag-icon flag-icon-fr">Fransa</option>
+                    <option value="gb" data-icon="flag-icon flag-icon-gb">İngiltere</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <aside>
+                <div class="user-profile">
+                    <input type="file" id="avatarUpload" class="avatar-upload" accept="image/*">
+                    <img src="https://via.placeholder.com/100" alt="Kullanıcı Avatarı" class="user-avatar" id="userAvatar" loading="lazy">
+                    <div class="user-name">Misafir Kullanıcı</div>
+                    <div class="user-city">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="city-name">Şehir Seçilmedi</span>
+                    </div>
+                    
+                    <div class="user-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="historyCount">0</span>
+                            <span class="stat-label">Dinlenen</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="favoritesCount">0</span>
+                            <span class="stat-label">Favori</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="likesCount">0</span>
+                            <span class="stat-label">Beğeni</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <nav class="nav-horizontal">
+                    <a href="#" class="tab-link active" data-tab="favorites">Favoriler</a>
+                    <a href="#" class="tab-link" data-tab="history">Geçmiş</a>
+                    <a href="profile.html" class="tab-link">Profil</a>
+                    <a href="#" class="tab-link" data-tab="settings">Ayarlar</a>
+                </nav>
+                
+                <div class="tab-content" id="history-tab">
+                    <div class="history-list" id="historyList">
+                        <div class="empty-message">Henüz dinleme geçmişiniz yok</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content active" id="favorites-tab">
+                    <div class="favorites-list" id="favoritesList">
+                        <div class="empty-message">Henüz favori radyonuz yok</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="profile-tab">
+                    <div class="profile-container">
+                        <div class="profile-header">
+                            <div class="profile-header-left">
+                                <img src="https://via.placeholder.com/72" alt="Avatar" class="profile-avatar" id="profileAvatarPreview">
+                                <div class="profile-ident">
+                                    <div class="profile-name" id="profileDisplayName">Misafir Kullanıcı</div>
+                                    <div class="profile-sub">
+                                        <i class="ri-map-pin-2-line"></i>
+                                        <span id="profileDisplayCity">Şehir Seçilmedi</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-counters">
+                                <div class="p-counter">
+                                    <div class="p-value" id="pFavoritesCount">0</div>
+                                    <div class="p-label">Favoriler</div>
+                                </div>
+                                <div class="p-counter">
+                                    <div class="p-value" id="pContactsCount">0</div>
+                                    <div class="p-label">Kişiler</div>
+                                </div>
+                                <div class="p-counter">
+                                    <div class="p-value" id="pBlockedCount">0</div>
+                                    <div class="p-label">Engelli</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-sections">
+                            <div class="contacts-section">
+                                <div class="section-title"><i class="ri-group-line"></i> Dinleyiciler</div>
+                                <div class="add-contact-row">
+                                    <input type="text" id="addContactInput" placeholder="Kullanıcı adı ekle...">
+                                    <button id="addContactBtn" class="btn-primary"><i class="ri-user-add-line"></i> Ekle</button>
+                                </div>
+                                <div class="contacts-list" id="contactsList">
+                                    <div class="empty-message">Kişi eklemediniz</div>
+                                </div>
+
+                                <div class="section-title" style="margin-top:16px;"><i class="ri-forbid-2-line"></i> Engellenenler</div>
+                                <div class="blocked-list" id="blockedList">
+                                    <div class="empty-message">Engelli kullanıcı yok</div>
+                                </div>
+                            </div>
+
+                            <div class="dm-section">
+                                <div class="section-title"><i class="ri-message-3-line"></i> Özel Mesaj</div>
+                                <div class="dm-header" id="dmHeader">Kişi seçin</div>
+                                <div class="dm-messages" id="dmMessages"></div>
+                                <div class="dm-input-row">
+                                    <input type="text" id="dmInput" placeholder="Mesaj yaz..." disabled>
+                                    <button id="dmSendBtn" class="btn-primary" disabled><i class="ri-send-plane-2-line"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="settings-tab">
+                    <form class="settings-form" id="profileForm">
+                        <div class="form-group">
+                            <label for="profileName">Kullanıcı Adı</label>
+                            <input type="text" id="profileName" placeholder="Kullanıcı adınız">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileCity">Şehir</label>
+                            <input type="text" id="profileCity" placeholder="Yaşadığınız şehir">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileEmail">E-posta</label>
+                            <input type="email" id="profileEmail" placeholder="E-posta adresiniz">
+                        </div>
+                        <div class="form-group password-container">
+                            <label for="currentPassword">Mevcut Şifre</label>
+                            <input type="password" id="currentPassword" placeholder="Mevcut şifreniz">
+                            <i class="fas fa-eye password-toggle" id="toggleCurrentPassword"></i>
+                        </div>
+                        <div class="form-group password-container">
+                            <label for="newPassword">Yeni Şifre</label>
+                            <input type="password" id="newPassword" placeholder="Yeni şifreniz">
+                            <i class="fas fa-eye password-toggle" id="toggleNewPassword"></i>
+                        </div>
+                        <div class="form-group password-container">
+                            <label for="confirmPassword">Şifre Tekrar</label>
+                            <input type="password" id="confirmPassword" placeholder="Yeni şifrenizi tekrar girin">
+                            <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                        </div>
+                        <button type="submit" class="save-btn">Kaydet</button>
+                    </form>
+                </div>
+            </aside>
+
+            <main>
+                <div class="sub-section now-playing-section">
+                    <h3><i class="ri-play-circle-fill"></i> Şu An <span id="currentRadioName">Radyo</span> Dinliyorsunuz</h3>
+                    
+                    <div class="player-container">
+                        <div class="player-section modern-player">
+                            <img id="modernPlayerLogo" src="https://via.placeholder.com/80" alt="Radyo Logo" class="modern-player-logo" loading="lazy">
+                            
+                            <div class="modern-player-info">
+                                <div class="modern-player-title" id="modernPlayerTitle">Radyo Seçilmedi</div>
+                                <div class="modern-player-artist" id="modernPlayerArtist">Canlı Yayın</div>
+                                <div id="modernPlayerSlogan" class="modern-player-slogan"></div>
+                                
+                                <div class="player-stats">
+                                    <span class="listener-count"><i class="ri-headphone-line"></i> <span id="listenerCount">1,245</span> dinleyici</span>
+                                    <span class="listener-count"><i class="ri-heart-2-line"></i> <span id="likeCount">0</span> beğeni</span>
+                                </div>
+                                
+                                <div class="equalizer-container" id="equalizer">
+                                    <div class="equalizer-bar"></div>
+                                    <div class="equalizer-bar"></div>
+                                    <div class="equalizer-bar"></div>
+                                    <div class="equalizer-bar"></div>
+                                    <div class="equalizer-bar"></div>
+                                    <div class="equalizer-bar"></div>
+                                </div>
+                                
+                                <div class="modern-player-controls">
+                                    <button class="modern-player-btn" id="modernPrevBtn"><i class="ri-skip-back-mini-fill"></i></button>
+                                    <button class="modern-player-btn play" id="modernPlayBtn"><i class="ri-play-fill"></i></button>
+                                    <button class="modern-player-btn" id="modernNextBtn"><i class="ri-skip-forward-mini-fill"></i></button>
+                                    <div class="volume-container">
+                                        <i class="ri-volume-up-line volume-icon"></i>
+                                        <input type="range" min="0" max="100" value="80" class="volume-control" id="volumeControl">
+                                    </div>
+                                </div>
+                                
+                                <div class="player-social-container">
+                                    <div class="player-actions">
+                                        <button class="player-action-btn like" id="likeBtn">
+                                            <i class="ri-heart-3-line"></i>
+                                        </button>
+                                        <button class="player-action-btn favorite" id="favoriteBtn">
+                                            <i class="ri-star-line"></i>
+                                        </button>
+                                        <button class="player-action-btn" id="shareBtn">
+                                            <i class="ri-share-forward-line"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="player-social-media">
+                                        <button class="player-social-btn facebook" id="facebookBtn">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </button>
+                                        <button class="player-social-btn twitter" id="twitterBtn">
+                                            <i class="fab fa-twitter"></i>
+                                        </button>
+                                        <button class="player-social-btn instagram" id="instagramBtn">
+                                            <i class="fab fa-instagram"></i>
+                                        </button>
+                                        <button class="player-social-btn youtube" id="youtubeBtn">
+                                            <i class="fab fa-youtube"></i>
+                                        </button>
+                                        <button class="player-social-btn website" id="websiteBtn">
+                                            <i class="ri-earth-line"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="loadingIndicator" style="display: none; margin-top: 10px; font-size: 0.9rem; color: #3498db;">
+                        <span class="loading"></span> Yükleniyor...
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3><i class="ri-chat-3-line"></i> Canlı Sohbet</h3>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message">
+                                <span class="message-sender">Moderatör:</span> Hoş geldiniz! Hangi radyoyu dinliyorsunuz?
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" placeholder="Mesajınızı yazın..." id="chatInput">
+                            <button id="sendBtn">Gönder</button>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <div class="recommendations-title"><i class="ri-thumb-up-line"></i> Önerilen Radyolar</div>
+                        <div class="recommendations-list" id="recommendationsList">
+                            <!-- Önerilen radyolar buraya eklenecek -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div class="stations-container">
+            <div class="stations-header">
+                <div class="stations-title-row">
+                    <h3 class="stations-title"><i class="ri-antenna-fill"></i> Radyo İstasyonları</h3>
+                </div>
+                
+                <div class="search-container">
+                    <i class="ri-search-2-line"></i>
+                    <input type="text" id="searchInput" placeholder="Radyo ara...">
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="favorites">Favoriler</button>
+                    <button class="filter-btn" data-filter="popular">Popüler</button>
+                </div>
+                
+                <div class="filter-sections">
+                    <div class="filter-section">
+                        <h4>Kategoriler</h4>
+                        <select class="filter-select" id="categorySelect">
+                            <option value="all">Tüm Kategoriler</option>
+                            <!-- Will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h4>Şehirler</h4>
+                        <select class="filter-select" id="citySelect">
+                            <option value="all">Tüm Şehirler</option>
+                            <!-- Will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stations-list" id="stationsList">
+                <!-- Stations will be loaded here by JavaScript -->
+            </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="ri-search-eye-line" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                <div>Sonuç bulunamadı</div>
+            </div>
+            
+            <!-- Pagination container -->
+            <div class="pagination">
+                <button class="page-btn" id="prevPageBtn" disabled><i class="ri-arrow-left-s-line"></i></button>
+                <div class="page-buttons" id="pageButtons"></div>
+                <button class="page-btn" id="nextPageBtn"><i class="ri-arrow-right-s-line"></i></button>
+            </div>
+        </div>
+
+        <!-- Radio details and contact form container -->
+        <div class="radio-details-container">
+            <div class="radio-info-container">
+                <h3 class="radio-info-title"><i class="ri-information-2-line"></i> Radyo Bilgileri</h3>
+                <div class="radio-info-content">
+                    <div class="radio-info-item">
+                        <span class="radio-info-label">Radyo Adı:</span>
+                        <span class="radio-info-value" id="radioInfoName">-</span>
+                    </div>
+                    <div class="radio-info-item">
+                        <span class="radio-info-label">Şehir:</span>
+                        <span class="radio-info-value" id="radioInfoCity">-</span>
+                    </div>
+                    <div class="radio-info-item">
+                        <span class="radio-info-label">Slogan:</span>
+                        <span class="radio-info-value" id="radioInfoSlogan">-</span>
+                    </div>
+                    <div class="radio-info-item">
+                        <span class="radio-info-label">Telefon:</span>
+                        <span class="radio-info-value" id="radioInfoPhone">-</span>
+                    </div>
+                    
+                    <div class="radio-social-icons">
+                        <a href="#" class="radio-social-icon facebook" id="radioSocialFacebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="radio-social-icon twitter" id="radioSocialTwitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="radio-social-icon instagram" id="radioSocialInstagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="radio-social-icon youtube" id="radioSocialYoutube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    
+                    <img src="https://via.placeholder.com/600x200?text=Radyo+Görseli" alt="Radyo Görseli" class="radio-image" id="radioInfoImage" loading="lazy">
+                </div>
+            </div>
+            
+            <div class="radio-contact-container">
+                <h3 class="radio-contact-title"><i class="ri-mail-send-line"></i> İletişim Formu</h3>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group-contact">
+                        <label for="contactName">Adınız</label>
+                        <input type="text" id="contactName" placeholder="Adınız ve soyadınız">
+                    </div>
+                    <div class="form-group-contact">
+                        <label for="contactEmail">E-posta</label>
+                        <input type="email" id="contactEmail" placeholder="E-posta adresiniz">
+                    </div>
+                    <div class="form-group-contact">
+                        <label for="contactSubject">Konu</label>
+                        <select id="contactSubject" class="filter-select">
+                            <option value="">Konu Seçiniz</option>
+                            <option value="öneri">Öneri</option>
+                            <option value="şikayet">Şikayet</option>
+                            <option value="reklam">Reklam</option>
+                            <option value="tekniksorun">Teknik Sorun</option>
+                            <option value="diger">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="form-group-contact">
+                        <label for="contactMessage">Mesajınız</label>
+                        <textarea id="contactMessage" placeholder="Mesajınızı buraya yazın"></textarea>
+                    </div>
+                    <button type="submit" class="send-message-btn">Mesaj Gönder</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer container -->
+        <div class="footer-container">
+            <p>© 2025 canliradyodinle.fm | Tüm hakları saklıdır.</p>
+            <p>Sitemizdeki tüm radyo yayınları, ilgili radyoların resmi akışları üzerinden sağlanmaktadır.</p>
+        </div>
+
+        <!-- Register Modal -->
+        <div class="modal" id="registerModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Kayıt Ol</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <form class="register-form" id="registerForm">
+                    <div class="form-row">
+                        <label for="regName">Kullanıcı Adı</label>
+                        <input type="text" id="regName" placeholder="Kullanıcı adınız" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="regCity">Şehir</label>
+                        <input type="text" id="regCity" placeholder="Yaşadığınız şehir" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="regEmail">E-posta</label>
+                        <input type="email" id="regEmail" placeholder="E-posta adresiniz" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="regPassword">Şifre</label>
+                        <input type="password" id="regPassword" placeholder="Şifreniz" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="regPasswordConfirm">Şifre Tekrar</label>
+                        <input type="password" id="regPasswordConfirm" placeholder="Şifrenizi tekrar girin" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Kayıt Ol</button>
+                </form>
+                <div class="login-link">
+                    Zaten hesabınız var mı? <a href="#" id="showLogin">Giriş yap</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Giriş Yap</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <form class="login-form" id="loginForm">
+                    <div class="form-row">
+                        <label for="loginEmail">E-posta</label>
+                        <input type="email" id="loginEmail" placeholder="E-posta adresiniz" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="loginPassword">Şifre</label>
+                        <input type="password" id="loginPassword" placeholder="Şifreniz" required>
+                    </div>
+                    <div class="reset-link">
+                        <a href="#" id="showReset">Şifremi Unuttum</a>
+                    </div>
+                    <button type="submit" class="submit-btn">Giriş Yap</button>
+                </form>
+                <div class="login-link">
+                    Hesabınız yok mu? <a href="#" id="showRegister">Kayıt ol</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reset Password Modal -->
+        <div class="modal" id="resetModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Şifremi Unuttum</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <form class="reset-form" id="resetForm">
+                    <div class="form-row">
+                        <label for="resetEmail">E-posta Adresiniz</label>
+                        <input type="email" id="resetEmail" placeholder="Kayıtlı e-posta adresiniz" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Şifre Sıfırlama Linki Gönder</button>
+                </form>
+                <div class="login-link">
+                    <a href="#" id="showLoginFromReset">Giriş sayfasına dön</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Modal -->
+        <div class="modal" id="shareModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Paylaş</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="share-options">
+                    <div class="share-option whatsapp" id="shareWhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp ile Paylaş</span>
+                    </div>
+                    <div class="share-option facebook" id="shareFacebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook ile Paylaş</span>
+                    </div>
+                    <div class="share-option twitter" id="shareTwitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter ile Paylaş</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        });
+    }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

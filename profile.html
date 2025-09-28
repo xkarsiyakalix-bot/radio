@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Radyo Dinle</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-row">
+                    <a href="index.html"><img src="images/logo.png" alt="Radyo Dinle" class="header-logo"></a>
+                    <span class="header-title">Profil</span>
+                </div>
+                <p>Hesap ve Mesajlar</p>
+            </div>
+            <div class="auth-buttons">
+                <a class="auth-btn" href="index.html">Ana Sayfa</a>
+            </div>
+        </header>
+
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-header-left">
+                    <img src="https://via.placeholder.com/72" alt="Avatar" class="profile-avatar" id="profileAvatarPreview">
+                    <div class="profile-ident">
+                        <div class="profile-name" id="profileDisplayName">Misafir Kullanıcı</div>
+                        <div class="profile-sub"><i class="ri-map-pin-2-line"></i> <span id="profileDisplayCity">Şehir Seçilmedi</span></div>
+                    </div>
+                </div>
+                <div class="profile-counters">
+                    <div class="p-counter">
+                        <div class="p-value" id="pFavoritesCount">0</div>
+                        <div class="p-label">Favoriler</div>
+                    </div>
+                    <div class="p-counter">
+                        <div class="p-value" id="pContactsCount">0</div>
+                        <div class="p-label">Kişiler</div>
+                    </div>
+                    <div class="p-counter">
+                        <div class="p-value" id="pBlockedCount">0</div>
+                        <div class="p-label">Engelli</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-sections">
+                <div class="contacts-section">
+                    <div class="section-title"><i class="ri-team-line"></i> Kişiler</div>
+                    <div class="add-contact-row">
+                        <input type="text" id="addContactInput" placeholder="Kullanıcı adı ekle...">
+                        <button id="addContactBtn" class="btn-primary"><i class="ri-user-add-line"></i> Ekle</button>
+                    </div>
+                    <div class="contacts-list" id="contactsList"></div>
+
+                    <div class="section-title" style="margin-top:16px;"><i class="ri-shield-keyhole-line"></i> Engelliler</div>
+                    <div class="blocked-list" id="blockedList"></div>
+                </div>
+
+                <div class="dm-section">
+                    <div class="section-title"><i class="ri-message-2-line"></i> Özel Mesaj</div>
+                    <div class="dm-header" id="dmHeader">Bir kişi seçin</div>
+                    <div class="dm-messages" id="dmMessages"></div>
+                    <div class="dm-input-row">
+                        <input id="dmInput" type="text" placeholder="Mesaj yaz..." disabled>
+                        <button id="dmSendBtn" class="btn-primary" disabled><i class="ri-send-plane-2-line"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>
+
+

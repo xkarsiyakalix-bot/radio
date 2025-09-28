@@ -1,0 +1,22 @@
+{
+  "name": "radyo-dinle-proxy",
+  "version": "1.0.0",
+  "description": "Metadata proxy server for radio player",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "dev": "nodemon proxy.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": ["radio", "metadata", "proxy"],
+  "author": "Radio Player",
+  "license": "MIT"
+}
+
